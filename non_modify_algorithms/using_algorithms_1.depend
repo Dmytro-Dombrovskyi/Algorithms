@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1401275515 source:e:\git_repo\algorithms\using_algorithms_1\main.cpp
+	<iostream>
+	<vector>
+	<string>
+	<algorithm>
+
