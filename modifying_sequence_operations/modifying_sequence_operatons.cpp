@@ -16,6 +16,7 @@ template<typename T>
 void print(T & widget) {cout << widget << " ";}
 int main()
 {
+    //#if 0
     // copy
     cout << "1. copy algorithm: \n";
     vector<string> names1 { "Dmytro", "Hanna", "Andrij" };
@@ -82,11 +83,60 @@ int main()
     cout << "Arr_1 after using copy_backward algorithm: " << endl;
     for(auto x : arr_1) cout << x << " ";
     cout << endl;
+    //#endif
 
     // move
     cout << "\n5. move algorithm: \n" << endl;
-    arr_1.clear(); arr_2.clear(); // int
+    arr_1.clear(); arr_2.clear(); // vector<int>
+
     for(int i = 0; i < 10; ++i) arr_1.push_back(i);
+
+    cout << "arr_1 contains: " << arr_1.size() << " elements: ";
+    for(auto x: arr_1) cout << " [" << x << "]";
+    cout << endl;
+    cout << "arr_2 contains: " << arr_2.size() << " elements: ";
+    for(auto x: arr_2) cout << " [" << x << "]";
+    cout << endl;
+
+            // moving ranges
+    cout << "Moving ranges...\n";
+    arr_2.resize(arr_1.size());
+    move(arr_1.begin(), arr_1.end(), arr_2.begin() );
+    cout << "arr_2 contains: " << arr_2.size() << " elements: ";
+    for(auto x: arr_2) cout << " [" << x << "]";
+    cout << endl;
+
+            // moving container
+    cout << "Moving container: " << endl;
+    arr_1 = move(arr_2);
+    cout << "arr_1 contains: " << arr_1.size() << " elements: ";
+    for(auto x : arr_1) cout << " [" << x << "]";
+    cout << endl;
+
+    cout << "arr_2 is in an unspecified but valid state." << endl;
+
+    // move_backward
+    cout << "\n6. move_backwards algorithm: \n" << endl;
+    arr_1.clear(); arr_2.clear(); // vector<int>
+    for(int i = 0; i < 10; ++i) arr_1.push_back(i*2);
+
+    cout << "arr_1 contains: " << arr_1.size() << " elements: ";
+    for(auto x: arr_1) cout << " [" << x << "]";
+    cout << endl;
+
+            // insert new element at the beginning of arr_2.end()
+    arr_2.resize(arr_1.size());
+    move_backward(arr_1.begin(), arr_1.end(), arr_2.end());
+    cout << "After using move_backwards: \n";
+    cout << "arr_2 contains: " << arr_2.size() << " elements: ";
+    for(auto x: arr_2) cout << " [" << x << "]";
+    cout << endl;
+
+
+
+
+
+
 
 
     return 0;
