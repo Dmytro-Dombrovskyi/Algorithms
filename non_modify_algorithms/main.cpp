@@ -274,6 +274,7 @@ int main()
 			 << (itr_num - num5.begin()) << endl;
 	else
 		cout << "number 4 wasn't found!" << endl;
+	// add for commit
 
     return 0;
 }
