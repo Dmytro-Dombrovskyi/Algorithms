@@ -30,9 +30,10 @@
 		</Build>
 		<Compiler>
 			<Add option="-pedantic" />
-			<Add option="-std=c++11" />
+			<Add option="-std=c++0x" />
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 		</Compiler>
 		<Unit filename="../modifying_sequence_operations/modifying_sequence_operatons.cpp" />
 		<Extensions>
