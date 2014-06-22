@@ -406,7 +406,8 @@ int main()
     cout << endl;
 
     int rem_value = 2;
-    remove(rem_array.begin(), rem_array.end(), rem_value);
+    rem_array.erase(remove(rem_array.begin(), rem_array.end(), rem_value),
+                    rem_array.end());
 
     cout << "Data after using remove algorithm: \n";
     for(auto x: rem_array) cout << x << " ";
@@ -420,8 +421,8 @@ int main()
     for(auto x: rem_if_val) cout << x << " ";
     cout << endl;
 
-    remove_if(rem_if_val.begin(), rem_if_val.end(),
-              [](int i)->bool{return i % 2;} );
+    rem_if_val.erase(remove_if(rem_if_val.begin(), rem_if_val.end(),
+              [](int x)->bool{return x % 2;} ), rem_if_val.end() );
 
     cout << "Data after using remove_if algorithm: \n";
     for(auto x: rem_if_val) cout << x << " ";
@@ -446,8 +447,8 @@ int main()
     for(auto x: rem_copy_arr2) cout << x << " ";
     cout << endl;
 
-    remove_copy(rem_copy_arr1.begin(), rem_copy_arr1.end(),
-              rem_copy_arr2.begin(), 2);
+    rem_copy_arr2.erase(remove_copy(rem_copy_arr1.begin(), rem_copy_arr1.end(),
+              rem_copy_arr2.begin(), 2), rem_copy_arr2.end() );
 
     cout << "After using remove_copy algorithm \n";
     cout << "Data in array 1: ";
@@ -476,9 +477,10 @@ int main()
     for(auto x: rem_copy_if_arr2) cout << x << " ";
     cout << endl;
 
-    remove_copy_if(rem_copy_if_arr1.begin(), rem_copy_if_arr1.end(),
-                   rem_copy_if_arr2.begin(),
-                   [](int i)->bool{return i % 2;} );
+    rem_copy_if_arr2.erase(remove_copy_if(rem_copy_if_arr1.begin(),
+                           rem_copy_if_arr1.end(), rem_copy_if_arr2.begin(),
+                           [](int i)->bool{return i % 2;} ),
+                           rem_copy_if_arr2.end() );
 
     cout << "After using remove_copy algorithm \n";
     cout << "Data in array 1: ";
@@ -525,9 +527,11 @@ int main()
     for(auto x: unique_copy_alg2) cout << x << " ";
     cout << endl;
 
-    unique_copy(unique_copy_alg1.begin(), unique_copy_alg1.end(),
-                unique_copy_alg2.begin(),
-                [](int a, int b)->bool {return a == b;} );
+    unique_copy_alg2.erase(unique_copy(unique_copy_alg1.begin(),
+                                        unique_copy_alg1.end(),
+                                        unique_copy_alg2.begin(),
+                            [](int a, int b)->bool {return a == b;} ),
+                            unique_copy_alg2.end() );
 
     vector<int>::iterator uni_copy_itr;
     for(uni_copy_itr = unique_copy_alg2.begin();
