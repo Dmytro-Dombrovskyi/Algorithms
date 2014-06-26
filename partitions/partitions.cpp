@@ -1,3 +1,5 @@
+// Partition algorithms
+// Dmytro Dombrovskyi // 26.06.2014 //
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -8,7 +10,7 @@ using namespace std;
 
 int main( )
 {
-#if 0
+
 	// #1: is_partitioned
 	cout << "#1. is_partitioned: " << endl;
 	array<int, 5> some_arr { 1, 2, 3, 4, 5};
@@ -64,7 +66,7 @@ int main( )
 	{
 		cout << *x << " ";
 	}
-	cout << endl;
+    cout << endl << endl;
 
 	// #3. stable_partition
 	cout << "#3. stable_partition: " << endl;
@@ -86,7 +88,7 @@ int main( )
 	{
 		cout << x << " ";
 	}
-	cout << endl;
+    cout << endl << endl;
 
 	// #4. partition copy
 	
@@ -112,11 +114,11 @@ int main( )
 	cout << "Even numbers: ";
 	for(auto x : even) cout << x << " ";
 	cout << endl << endl;
-#endif
+
 	// 4.1 partition_copy (using string instead int)
 	cout << "#4.1 partition_copy: (names): " << endl;
 
-	vector<string> names1{"Dmytro", "Andrew", "Angela", "Jack", "Michael", "Daniel"};
+    vector<string> names1{"Dmytro", "Andrew", "Anechka", "Angela", "Jack", "Michael", "Daniel"};
 	vector<string> names_first_latter_A;
 	vector<string> names_other_latters;
 
@@ -124,15 +126,40 @@ int main( )
 	for(auto x : names1) cout << x << ", ";
 	cout << endl;
 
-	size_t n = count_if(names1.begin( ), names1.end( ),
+    size_t n_count = count_if(names1.begin( ), names1.end( ),
 							  [](const string & some_name)->bool { return some_name[0] == 'A'; });
-	names_first_latter_A.resize(n);
-	names_other_latters.resize(names1.size( ) - n);
-	copy_par
+    names_first_latter_A.resize(n_count);
+    names_other_latters.resize(names1.size( ) - n_count);
+    partition_copy(names1.begin(), names1.end(),
+                   names_first_latter_A.begin(), names_other_latters.begin(),
+                   [](const string & some_name)->bool { return some_name[0] == 'A'; });
+    cout << endl;
+    cout << "Data names 1: ";
+    for(auto x : names_first_latter_A) cout << x << " ";
+    cout << endl;
+    cout << "Data names 2: ";
+    for(auto x : names_other_latters) cout << x << " ";
+    cout << endl << endl;
 
 
 	// #5. partition point
-
+    cout << "#5. partition_point: " << endl;
+    vector<int> par_point_arr {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    cout << "Data in array: ";
+    for(auto x = par_point_arr.begin(); x != par_point_arr.end(); ++x)
+    {
+        cout << *x << " ";
+    } cout << endl;
+    // ordered partition before using algorithm
+    stable_partition(par_point_arr.begin(), par_point_arr.end(),
+              [](int i)->bool{ return i % 2 == 0; });
+    vector<int> par_point_arr_odd;
+    auto par_point_itr = partition_point(par_point_arr.begin(), par_point_arr.end(),
+                                        [](int i)->bool{ return i % 2 == 0; });
+    par_point_arr_odd.assign(par_point_arr.begin(), par_point_itr);
+    cout << "Odd values in array: ";
+    for(auto x : par_point_arr_odd) cout << x << " ";
+    cout <<endl << endl;
 
 
 	//cin.get( );
