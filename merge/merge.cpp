@@ -22,7 +22,7 @@ class compare
 
 int main()
 {
-#if 0
+
     // #1. merge
     cout << "#1. merge sorted ranges: " << endl;
     vector<int> merge_arr_1, merge_arr_2;
@@ -83,7 +83,7 @@ int main()
     cout << "Data in array 3: ";
     for(auto x : data3) cout << x << " "; cout << endl;
     cout << endl;
-#endif
+
     // #3. includes
     cout << "#3. includes: " << endl;
     vec_int data_incl_1;
@@ -135,10 +135,53 @@ int main()
 
     // #5. set_intersection
     cout << "#5. set_intersection: " << endl;
+    vec_int data_set1, data_set2, data_set3;
+    for(int i = 0; i < 10; ++i)
+    {
+        data_set1.push_back(i);
+        data_set2.push_back(i * 3);
+    }
+    data_set3.resize(data_set1.size() + data_set2.size());
+
+    vec_int::iterator it_set;
+    compare<int> set_compare;
+    it_set = std::set_intersection(data_set1.begin(), data_set1.end(),
+                                   data_set2.begin(), data_set2.end(),
+                                   data_set3.begin(), set_compare );
+    data_set3.resize(it_set - data_set3.begin());
+    cout << "Data in array 1: ";
+    for(auto x : data_set1) cout << x << ' '; cout << endl;
+    cout << "Data in array 2: ";
+    for(auto x : data_set2) cout << x << ' '; cout << endl;
+    cout << "Data intersection: ";
+    for(auto x : data_set3) cout << x << ' '; cout << endl;
+    cout << endl;
 
 
-
-
+    // #6. set_difference
+    cout << "#6. set_difference: " << endl;
+    data1.clear();
+    data2.clear();
+    data3.clear();
+    for(int i = 0; i < 10; ++i)
+    {
+        data1.push_back(i);
+        data2.push_back(i * 2);
+    }
+    data3.resize(data1.size() + data2.size());
+    vec_int::it_set_dif;
+    compare<int> set_diff_compare; // class comparator
+    it_set_dif = std::set_difference(data1.begin(), data1.end(),
+                                 data2.begin(), data2.end(),
+                                 data3.begin(), set_diff_compare);
+    data3.resize(it_set - data2.begin());
+    cout << "Data 1: ";
+    for(auto x : data1) cout << x << ' '; cout << endl;
+    cout << "Data 2: ";
+    for(auto x : data2) cout << x << ' '; cout << endl;
+    cout << "Data 3: ";
+    for(auto x : data3) cout << x << ' '; cout << endl;
+    cout << endl;
 
     return 0;
 }
