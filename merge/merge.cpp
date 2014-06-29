@@ -169,12 +169,12 @@ int main()
         data2.push_back(i * 2);
     }
     data3.resize(data1.size() + data2.size());
-    vec_int::it_set_dif;
+    vec_int::iterator it_set_dif;
     compare<int> set_diff_compare; // class comparator
     it_set_dif = std::set_difference(data1.begin(), data1.end(),
                                  data2.begin(), data2.end(),
                                  data3.begin(), set_diff_compare);
-    data3.resize(it_set - data2.begin());
+    data3.resize(it_set_dif - data3.begin());
     cout << "Data 1: ";
     for(auto x : data1) cout << x << ' '; cout << endl;
     cout << "Data 2: ";
@@ -182,6 +182,37 @@ int main()
     cout << "Data 3: ";
     for(auto x : data3) cout << x << ' '; cout << endl;
     cout << endl;
+
+    // #7. set_symmetric_difference
+    // Symmetric difference of two sorted ranges
+    cout << "#7. set_symmetric_difference" << endl;
+
+    data1.clear(); data2.clear(); data3.clear();
+    for(int i = 0; i < 10; ++i)
+    {
+        data1.push_back(i * 5);
+        data2.push_back(i * 10);
+    }
+    data3.resize(data1.size() + data2.size());
+    vec_int::iterator itr_set_symm_diff;
+    compare<int> set_symm_diff_compare; // comparator
+    itr_set_symm_diff =
+        std::set_symmetric_difference(data1.begin(), data1.end(),
+                                      data2.begin(), data2.end(),
+                                      data3.begin(), set_diff_compare);
+    data3.resize(itr_set_symm_diff - data3.begin());
+
+    cout << "Data 1: ";
+    for(auto x : data1) cout << x << ' '; cout << endl;
+    cout << "Data 2: ";
+    for(auto x : data2) cout << x << ' '; cout << endl;
+    cout << "Data 3: ";
+    for(auto x : data3) cout << x << ' '; cout << endl;
+    cout << endl;
+
+
+
+
 
     return 0;
 }
